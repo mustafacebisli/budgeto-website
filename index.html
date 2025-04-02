@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budgeto - Destek Merkezi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         :root {
-            --primary-color: #007AFF;
-            --secondary-color: #5856D6;
+            --primary-gradient: linear-gradient(135deg, #007AFF, #5856D6);
+            --secondary-gradient: linear-gradient(135deg, #34C759, #30B0C7);
             --text-color: #333;
-            --bg-color: #f5f5f7;
+            --bg-color: #f8f9fa;
             --card-bg: #ffffff;
+            --card-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            --hover-shadow: 0 15px 30px rgba(0,0,0,0.12);
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
                 --text-color: #ffffff;
-                --bg-color: #1c1c1e;
-                --card-bg: #2c2c2e;
+                --bg-color: #000000;
+                --card-bg: #1c1c1e;
+                --card-shadow: 0 10px 20px rgba(0,0,0,0.2);
             }
         }
 
@@ -31,135 +35,199 @@
         }
 
         .header {
-            background: var(--primary-color);
+            background: var(--primary-gradient);
             color: white;
-            padding: 2rem 0;
+            padding: 4rem 0;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                        linear-gradient(-45deg, rgba(255,255,255,0.1) 25%, transparent 25%),
+                        linear-gradient(45deg, transparent 75%, rgba(255,255,255,0.1) 75%),
+                        linear-gradient(-45deg, transparent 75%, rgba(255,255,255,0.1) 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            animation: backgroundMove 20s linear infinite;
+        }
+
+        @keyframes backgroundMove {
+            0% { background-position: 0 0, 0 10px, 10px -10px, -10px 0px; }
+            100% { background-position: 20px 0, 20px 10px, 30px -10px, 10px 0px; }
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
         }
 
         h1, h2, h3 {
-            color: var(--primary-color);
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
         }
 
         .feature-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
             margin: 2rem 0;
         }
 
         .feature-item {
-            padding: 20px;
-            border-radius: 8px;
+            padding: 30px;
+            border-radius: 12px;
             background: var(--card-bg);
             text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--secondary-gradient);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-shadow);
         }
 
         .feature-icon {
-            font-size: 2rem;
-            color: var(--primary-color);
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-icon::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .app-name {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: 3px;
             margin-bottom: 1rem;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .email-button button {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .email-button button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .faq-item {
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
+            padding: 20px;
+            border-radius: 12px;
+            background: var(--card-bg);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateX(10px);
         }
 
         .faq-question {
             font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-form {
-            display: grid;
-            gap: 1rem;
-        }
-
-        input, textarea {
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            width: 100%;
-            background: var(--card-bg);
-            color: var(--text-color);
-        }
-
-        button {
-            background: var(--primary-color);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        button:hover {
-            opacity: 0.9;
+            font-size: 1.2em;
+            margin-bottom: 1rem;
+            color: #007AFF;
         }
 
         footer {
+            background: var(--primary-gradient);
+            color: white;
             text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
-            border-top: 1px solid #ddd;
+            padding: 3rem 0;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        .app-name {
-            font-size: 2.5rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            margin-bottom: 0.5rem;
-            color: white;
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
         }
 
-        .form-success {
-            display: none;
-            background: #4CAF50;
-            color: white;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-top: 1rem;
-        }
+        @media (max-width: 768px) {
+            .app-name {
+                font-size: 2.5rem;
+            }
 
-        .form-error {
-            display: none;
-            background: #f44336;
-            color: white;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-top: 1rem;
-        }
+            .card {
+                padding: 20px;
+            }
 
-        .contact-section {
-            text-align: center;
-            padding: 20px 0;
-        }
-        .email-button {
-            text-decoration: none;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-        .contact-email {
-            color: var(--primary-color);
-            font-size: 1.1em;
-            margin-top: 15px;
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
