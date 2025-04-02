@@ -146,6 +146,21 @@
             border-radius: 6px;
             margin-top: 1rem;
         }
+
+        .contact-section {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .email-button {
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .contact-email {
+            color: var(--primary-color);
+            font-size: 1.1em;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
@@ -218,14 +233,13 @@
 
         <div class="card">
             <h2>İletişim</h2>
-            <p>Sorularınız veya önerileriniz için bize ulaşın:</p>
-            <form class="contact-form" action="https://formspree.io/f/mbjnkwkv" method="POST">
-                <input type="email" name="email" placeholder="E-posta adresiniz" required>
-                <textarea name="message" rows="4" placeholder="Mesajınız" required></textarea>
-                <button type="submit">Gönder</button>
-                <div class="form-success">Mesajınız başarıyla gönderildi. En kısa sürede size dönüş yapacağız.</div>
-                <div class="form-error">Mesaj gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.</div>
-            </form>
+            <p>Sorularınız veya önerileriniz için bize e-posta gönderebilirsiniz:</p>
+            <div class="contact-section">
+                <a href="mailto:butgetofinans@gmail.com" class="email-button">
+                    <button type="button">E-posta Gönder</button>
+                </a>
+                <p class="contact-email">E-posta: butgetofinans@gmail.com</p>
+            </div>
         </div>
     </div>
 
